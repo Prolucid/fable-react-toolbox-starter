@@ -11,8 +11,8 @@ type App() =
     inherit React.Component<obj, Model>()
     
     member x.render() =
-        RT.button [] [ unbox "Click!" ]
-//        R.div [] [ unbox "Hello, world" ]
+        RT.button [] [ unbox "Click!" ] // fable-compiler gives inline error
+        // R.div [] [ unbox "Hello, world" ] // Works
 
 ReactDom.render(
         R.com<App,_,_> () [],
