@@ -1,0 +1,26 @@
+{
+    "module": "amd",
+    "sourceMaps": true,
+    "projFile": "Starter.fsproj",
+    "outDir": "out",
+    "scripts": {
+        "prebuild": "npm install"
+    },
+    "targets": {
+        "debug": {
+            "watch": true,
+            "symbols": [
+                "DEV_SERVER"
+            ],
+            "scripts": {
+                "postbuild": "webpack"
+            }
+        },
+        "production": {
+            "sourceMaps": false,
+            "scripts": {
+                "postbuild": "webpack -p"
+            }
+        }
+    }
+}

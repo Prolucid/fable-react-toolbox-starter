@@ -1,0 +1,29 @@
+{
+  "name": "fable-react-toolbox-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "fable -w",
+    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.4.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "fable-import-react": "^0.5.2",
+    "fable-react-toolbox": "^0.3.0",
+    "react-hot-loader": "^3.0.0-beta.5",
+    "source-map-loader": "^0.1.5",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "dependencies": {
+    "core-js": "^2.4.1",
+    "fable-core": "^0.6.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
