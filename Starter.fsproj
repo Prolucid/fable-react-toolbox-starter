@@ -52,8 +52,7 @@
   <ItemGroup>
     <Compile Include="node_modules/fable-import-react/Fable.Import.React.fs" />
     <Compile Include="node_modules/fable-import-react/Fable.Helpers.React.fs" />
-    <Compile Include="node_modules/fable-react-toolbox/Fable.Import.ReactToolbox.fs" />
-    <Compile Include="node_modules/fable-react-toolbox/Fable.Import.ReactToolbox.Components.fs" />
+    <Compile Include="node_modules/fable-react-toolbox/Fable.Helpers.ReactToolbox.fs" />
     <Compile Include="App.fs" />
   </ItemGroup>
   <ItemGroup>
