@@ -2,9 +2,11 @@
 
 open Fable.Core
 open Fable.Import
+open Fable.React
 open Fable.Helpers.ReactToolbox
 open Fable.Helpers.React.Props
 
+[<Pojo>]
 type Model = {
     tabIndex: int
     isChecked: bool
@@ -22,7 +24,7 @@ module RT = Fable.Helpers.ReactToolbox
     
 type App() as this =
     inherit React.Component<obj, Model>()
-    do this.state <- init
+    do this.setInitState init
         
     member this.render() =
         R.div [] [

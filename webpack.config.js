@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var cfg = {
   devtool: "source-map",
-  entry: "./out/App.js",
+  entry: "./out/fable-react-toolbox-starter/App.js",
   output: {
     path: path.join(__dirname, "public"),
     publicPath: "/public",
@@ -25,6 +25,11 @@ var cfg = {
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       }
 	]
+  },
+  resolve: {
+    modules: [
+      "node_modules", path.resolve("node_modules/")
+    ]
   },
   postcss: [autoprefixer],
   sassLoader: {
