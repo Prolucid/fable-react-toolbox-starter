@@ -1302,9 +1302,9 @@ fable-core@^0.7.15:
   version "0.7.26"
   resolved "https://registry.yarnpkg.com/fable-core/-/fable-core-0.7.26.tgz#0b0870203441ca47af42d07245421db558d0ea17"
 
-fable-react-toolbox@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/fable-react-toolbox/-/fable-react-toolbox-0.11.0.tgz#359ea27727a5d9f4346114bbb9b1b73f624127ff"
+fable-react-toolbox@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/fable-react-toolbox/-/fable-react-toolbox-0.13.0.tgz#93342e8af1dae01c13a650c26cf9f54ba030bfa6"
   dependencies:
     react-toolbox "^1.2.1"
 
