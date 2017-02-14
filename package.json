@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "fable -w",
+    "bundle": "webpack -w",
     "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "core-js": "^2.4.1",
-    "fable-core": "^0.7.15",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.4.1"
@@ -22,8 +22,9 @@
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "fable-compiler": "^0.7.22",
-    "fable-react": "^0.7.12",
-    "fable-react-toolbox": "^0.11.0",
+    "fable-core": "^0.7.15",
+    "fable-react": "^0.8.5",
+    "fable-react-toolbox": "^0.13.0",
     "immutability-helper": "^2.0.0",
     "node-sass": "^3.10.0",
     "normalize.css": "^4.2.0",

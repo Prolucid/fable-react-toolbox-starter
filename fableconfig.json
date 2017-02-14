@@ -7,9 +7,6 @@
         "Fable.Core": "fable-core/umd",
         "Fable.React": "fable-react/umd"
     },
-    "scripts": {
-        "prebuild": "npm install"
-    },
     "targets": {
         "debug": {
             "watch": true,

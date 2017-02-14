@@ -22,8 +22,8 @@ let init = {
 module R = Fable.Helpers.React
 module RT = Fable.Helpers.ReactToolbox
     
-type App() as this =
-    inherit React.Component<obj, Model>()
+type App(props) as this =
+    inherit React.Component<obj, Model>(props)
     do this.setInitState init
         
     member this.render() =
