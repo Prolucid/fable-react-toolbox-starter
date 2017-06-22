@@ -6,4 +6,5 @@ bin
 obj
 .sln
 out
-public
+bundle*
+packages

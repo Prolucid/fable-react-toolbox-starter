@@ -1,39 +1,36 @@
 {
   "name": "fable-react-toolbox-starter",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "repository": "https://github.com/2sComplement/fable-react-toolbox-starter.git",
+  "author": "Justin <justin.sacks@prolucid.ca>",
+  "license": "MIT",
   "scripts": {
-    "build": "fable -w",
-    "bundle": "webpack -w",
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build": "webpack",
+    "splitter": "node splitter.config.js",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "core-js": "^2.4.1",
-    "react": "^15.4.1",
-    "react-addons-css-transition-group": "^15.4.1",
-    "react-dom": "^15.4.1"
-  },
   "devDependencies": {
-    "autoprefixer": "^6.4.1",
-    "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "fable-compiler": "^0.7.22",
-    "fable-core": "^0.7.15",
-    "fable-react": "^0.8.5",
-    "fable-react-toolbox": "^0.13.0",
-    "immutability-helper": "^2.0.0",
-    "node-sass": "^3.10.0",
-    "normalize.css": "^4.2.0",
-    "postcss-loader": "^0.13.0",
-    "react-hot-loader": "^3.0.0-beta.5",
-    "sass-loader": "^4.0.2",
-    "source-map-loader": "^0.1.5",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "fable-loader": "^1.0.0-narumi-905",
+    "fable-splitter": "^0.1.2",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "sass-loader": "^6.0.6",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-toolbox": "^1.2.1"
   }
 }
