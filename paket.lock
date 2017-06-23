@@ -10,7 +10,7 @@ NUGET
       Fable.Core (>= 1.1.2) - restriction: >= netstandard1.6
       Fable.Import.Browser (>= 0.1) - restriction: >= netstandard1.6
       FSharp.Core (>= 4.2.1) - restriction: >= netstandard1.6
-    Fable.ReactToolbox (1.1.0-beta-2)
+    Fable.ReactToolbox (1.1.0-beta-3)
       Fable.Core (>= 1.1.2) - restriction: >= netstandard1.6
       Fable.React (>= 1.1) - restriction: >= netstandard1.6
       FSharp.Core (>= 4.2.1) - restriction: >= netstandard1.6
