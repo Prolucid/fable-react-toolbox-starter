@@ -26,8 +26,6 @@ type App(props) as this =
     do this.setInitState init
         
     member this.render() =
-        Fable.Import.Browser.console.log(R.div)
-        Fable.Import.Browser.console.log(RT.appBar)
         R.div [] [
             RT.appBar [ AppBarProps.LeftIcon "grade" ] []
             // RT.appBar %["LeftIcon" ==> "grade"] []
