@@ -10,12 +10,14 @@ type Model = {
     tabIndex: int
     isChecked: bool
     info: string
+    isDialogActive: bool
 }
 
 let init = {
     tabIndex = 0
     isChecked = true
     info = "Something here"
+    isDialogActive = false
 }
 
 module R = Fable.Helpers.React
@@ -26,6 +28,7 @@ type App(props) as this =
     do this.setInitState init
         
     member this.render() =
+        let actions = [| {label = "Close"; onClick = (fun _ -> this.setState({this.state with isDialogActive = false}))} |]
         R.div [] [
             RT.appBar [ AppBarProps.LeftIcon "grade" ] []
             // RT.appBar %["LeftIcon" ==> "grade"] []
@@ -53,6 +56,19 @@ type App(props) as this =
                         RT.listDivider [] []
                         RT.listItem [ Caption "Item 2"; Legend "Turns it up a notch"; RightIcon <| unbox("star") ] []
                     ]
+                ]
+                RT.tab [ Label "Dialog" ] [
+                    R.div [] [
+                        RT.button [ Label "Toggle Dialog"; OnClick (fun _ -> this.setState({this.state with isDialogActive = true})) ] []
+                        RT.dialog [
+                            Title "This is a dialog"
+                            DialogProps.Active this.state.isDialogActive
+                            DialogProps.OnEscKeyDown <| unbox (fun _ -> this.setState({this.state with isDialogActive = false}))
+                            DialogProps.Actions actions
+                        ] [
+                            R.div [] [ unbox "Dialog data goes here" ]
+                        ]
+                    ]     
                 ]
             ]
         ]
