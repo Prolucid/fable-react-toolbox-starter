@@ -7,3 +7,5 @@ obj
 .sln
 out
 public
+packages
+paket-files

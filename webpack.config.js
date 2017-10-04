@@ -1,65 +1,87 @@
-var path = require("path");
-var webpack = require("webpack");
-const autoprefixer = require('autoprefixer');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require("path");
+const fs = require("fs");
+const webpack = require("webpack");
+const fableUtils = require("fable-utils");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var out_path = path.resolve("./public");
+var proj_path = "./src";
+
+var babelOptions = fableUtils.resolveBabelOptions({
+  presets: [["es2015", { "modules": false }]],
+  plugins: ["transform-runtime"]
+});
 
 var cfg = {
   devtool: "source-map",
-  entry: "./out/fable-react-toolbox-starter/App.js",
+  entry:  proj_path+"/Starter.fsproj",
   output: {
-    path: path.join(__dirname, "public"),
-    publicPath: "/public",
-    filename: "bundle.js"
+      publicPath: "/",
+      path: out_path,
+      filename: "bundle.js"
   },
   module: {
-    preLoaders: [
+    rules: [
+      {
+        test: /\.fs(x|proj)?$/,
+        use: {
+          loader: "fable-loader",
+          options: { babel: babelOptions }
+        }
+      },      
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "source-map-loader"
+        exclude: /node_modules[\\\/](?!fable-)/,
+        use: {
+          loader: 'babel-loader',
+          options: babelOptions
+        },
+      },
+      {
+        test: /(\.scss|\.css)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              query: {
+                plugins: () => [
+                  fableUtils
+                ]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              query: {
+                data: '@import "'+proj_path+'/theme/_config.scss";',
+                includePaths: [path.resolve(__dirname, proj_path+'theme')]
+              }
+            }
+          ]
+        }),
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: 'url-loader?limit=8192'
       }
     ],
-    loaders: [
-	  {
-        test: /(\.scss|\.css)$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
-      }
-	]
   },
   resolve: {
-    modules: [
-      "node_modules", path.resolve("node_modules/")
-    ]
-  },
-  postcss: [autoprefixer],
-  sassLoader: {
-    data: '@import "theme/_config.scss";',
-    includePaths: [path.resolve(__dirname, './out')]
+    modules: ["node_modules", path.resolve('node_modules')]
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css', { allChunks: true })
+    new ExtractTextPlugin({ filename: 'bundle.css', allChunks: true })
   ]
 };
 
-if (process.env.WEBPACK_DEV_SERVER) {
-    cfg.entry = [
-        "webpack-dev-server/client?http://localhost:8081",
-        'webpack/hot/only-dev-server',
-        "./out"
-    ];
-    cfg.plugins = [
-        new webpack.HotModuleReplacementPlugin()    
-    ];
-    cfg.module.loaders = [{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "react-hot-loader"
-    }];
-    cfg.devServer = {
-        hot: true,
-        contentBase: "public/",
-        publicPath: "/"
-    };
-}
 
 module.exports = cfg;

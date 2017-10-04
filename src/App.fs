@@ -2,7 +2,6 @@
 
 open Fable.Core
 open Fable.Import
-open Fable.React
 open Fable.Helpers.ReactToolbox
 open Fable.Helpers.React.Props
 
@@ -51,7 +50,7 @@ type App(props) as this =
                         RT.listDivider [] []
                         RT.listItem [ Caption "Item 1"; Legend "Keeps it simple" ] []
                         RT.listDivider [] []
-                        RT.listItem [ Caption "Item 2"; Legend "Turns it up a notch"; RightIcon <| Case2("star") ] []
+                        RT.listItem [ Caption "Item 2"; Legend "Turns it up a notch"; RightIcon (U2.Case2 "star") ] []
                     ]
                 ]
             ]

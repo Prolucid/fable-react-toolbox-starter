@@ -5,8 +5,8 @@ This is a simple demo of [fable-react-toolbox](https://github.com/2sComplement/f
 
 ## Build
 1. `yarn`
-2. `yarn build`
+2. `pushd src && dotnet restore && dotnet fable yarn-run build && popd`
 
 ## Running a hot-loading webpack server
-`yarn start`
+`pushd src && dotnet fable yarn-run start`
 open http://localhost:8080/
