@@ -52,14 +52,6 @@ var cfg = {
               }
             },
             {
-              loader: 'postcss-loader',
-              query: {
-                plugins: () => [
-                  fableUtils
-                ]
-              }
-            },
-            {
               loader: 'sass-loader',
               query: {
                 data: '@import "'+proj_path+'/theme/_config.scss";',
