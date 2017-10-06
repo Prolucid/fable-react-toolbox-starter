@@ -5,5 +5,11 @@
   <ItemGroup>
     <Compile Include="App.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\webpack.config.js">
+      <Link>webpack.config.js</Link>
+    </Content>
+    <Content Include="paket.references" />
+  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

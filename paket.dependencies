@@ -2,11 +2,11 @@ source https://nuget.org/api/v2
 storage:none
 
 nuget FSharp.Core
-nuget Fable.Core
+nuget Fable.Core prerelease
 nuget Fable.Elmish.React prerelease
 nuget Fable.Elmish.Browser prerelease
 nuget Fable.Elmish.Debugger prerelease
-nuget Fable.ReactToolbox
+nuget Fable.ReactToolbox prerelease
+nuget Fable.Elmish.HMR prerelease
 
-clitool dotnet-fable
-
+clitool dotnet-fable prerelease
