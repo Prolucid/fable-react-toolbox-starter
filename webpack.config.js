@@ -8,72 +8,86 @@ var out_path = path.resolve("./public");
 var proj_path = "./src";
 
 var babelOptions = fableUtils.resolveBabelOptions({
-  presets: [["es2015", { "modules": false }]],
-  plugins: ["transform-runtime"]
+    presets: [["es2015", {"modules": false}]],
+    plugins: ["transform-runtime"]
 });
 
 var cfg = {
-  devtool: "source-map",
-  entry:  proj_path+"/Starter.fsproj",
-  output: {
-      publicPath: "/",
-      path: out_path,
-      filename: "bundle.js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.fs(x|proj)?$/,
-        use: {
-          loader: "fable-loader",
-          options: { babel: babelOptions }
-        }
-      },      
-      {
-        test: /\.js$/,
-        exclude: /node_modules[\\\/](?!fable-)/,
-        use: {
-          loader: 'babel-loader',
-          options: babelOptions
+    devtool: "source-map",
+    entry: proj_path + "/Starter.fsproj",
+    output: {
+        publicPath: "/",
+        path: out_path,
+        filename: "bundle.js"
+    },
+    devServer: {
+        proxy: {
+            '/api/*': {
+                target: 'http://localhost:8080',
+                changeOrigin: true
+            }
         },
-      },
-      {
-        test: /(\.scss|\.css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
+        hot: true,
+        inline: true
+    },
+    module: {
+        rules: [
             {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
+                test: /\.fs(x|proj)?$/,
+                use: {
+                    loader: "fable-loader",
+                    options: {
+                        babel: babelOptions,
+                        extra: {optimizeWatch: true}
+                    }
+                }
             },
             {
-              loader: 'sass-loader',
-              query: {
-                data: '@import "'+proj_path+'/theme/_config.scss";',
-                includePaths: [path.resolve(__dirname, proj_path+'theme')]
-              }
+                test: /\.js$/,
+                exclude: /node_modules[\\\/](?!fable-)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: babelOptions
+                }
+            },
+            {
+                test: /(\.scss|\.css)$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                modules: true,
+                                sourceMap: true,
+                                importLoaders: true,
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            query: {
+                                data: '@import "' + proj_path + '/theme/_config.scss";',
+                                includePaths: [path.resolve(__dirname, proj_path + 'theme')]
+                            }
+                        }
+                    ]
+                }),
+            },
+            {
+                test: /\.(png|jpg)$/,
+                use: 'url-loader?limit=8192'
             }
-          ]
-        }),
-      },
-      {
-        test: /\.(png|jpg)$/,
-        use: 'url-loader?limit=8192'
-      }
-    ],
-  },
-  resolve: {
-    modules: ["node_modules", path.resolve('node_modules')]
-  },
-  plugins: [
-    new ExtractTextPlugin({ filename: 'bundle.css', allChunks: true })
-  ]
+        ]
+    },
+    resolve: {
+        modules: ["node_modules", path.resolve('node_modules')]
+    },
+    plugins: [
+        new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
+    ]
 };
-
 
 module.exports = cfg;
