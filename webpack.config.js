@@ -20,6 +20,9 @@ var cfg = {
       path: out_path,
       filename: "bundle.js"
   },
+  devServer: {
+    contentBase: './public'
+  }
   module: {
     rules: [
       {
