@@ -5,30 +5,49 @@ open Fable.Import
 open Fable.Helpers.ReactToolbox
 open Fable.Helpers.React.Props
 
-[<Pojo>]
+// [<Literal>]
+// let ConfigThemeSource = __SOURCE_DIRECTORY__ + "/theme/_config.scss"
+// let config:obj = Fable.Core.JsInterop.importAll ConfigThemeSource
+// [<Literal>]
+// let AppBarThemeSource = __SOURCE_DIRECTORY__ + "/theme/AppBarTheme.scss"
+// let appBarTheme:obj = Fable.Core.JsInterop.importAll AppBarThemeSource
+
 type Model = {
     tabIndex: int
     isChecked: bool
     info: string
 }
 
-let init = {
+type Msg =
+    | TabChanged of int
+    | TextChanged of string
+    | CheckboxChanged of bool
+    | SwitchChanged of bool
+
+
+let init () = {
     tabIndex = 0
     isChecked = true
     info = "Something here"
 }
 
+let update msg model =
+    match msg with
+    | TabChanged i ->
+        { model with tabIndex = i }
+    | TextChanged s ->
+        { model with info = s}    
+    | CheckboxChanged v 
+    | SwitchChanged v ->
+        { model with isChecked = v}    
+
 module R = Fable.Helpers.React
 module RT = Fable.Helpers.ReactToolbox
-    
-type App(props) as this =
-    inherit React.Component<obj, Model>(props)
-    do this.setInitState init
-        
-    member this.render() =
+
+let view model dispatch =    
         R.div [] [
             RT.appBar [ AppBarProps.LeftIcon "grade" ] []
-            RT.tabs [ Index this.state.tabIndex; TabsProps.OnChange (fun i -> this.setState({this.state with tabIndex = i})) ] [
+            RT.tabs [ Index model.tabIndex; TabsProps.OnChange (TabChanged >> dispatch) ] [
                 RT.tab [ Label "Buttons" ] [
                     R.section [] [
                         RT.button [ Icon "help"; Label "Help"; ButtonProps.Primary true; Raised true ] []
@@ -39,9 +58,9 @@ type App(props) as this =
                 ]
                 RT.tab [ Label "Inputs" ] [
                     R.section [] [
-                        RT.input [ Type "text"; Label "Information"; InputProps.Value this.state.info; InputProps.OnChange (fun v -> this.setState({this.state with info = v})) ] []
-                        RT.checkbox [ Label "Check me"; Checked this.state.isChecked; CheckboxProps.OnChange (fun v -> this.setState({this.state with isChecked = v})) ] []
-                        RT.switch [ Label "Switch me"; Checked this.state.isChecked; SwitchProps.OnChange (fun v -> this.setState({this.state with isChecked = v})) ] []
+                        RT.input [ Type "text"; Label "Information"; InputProps.Value model.info; InputProps.OnChange (TextChanged >> dispatch) ] []
+                        RT.checkbox [ Label "Check me"; Checked model.isChecked; CheckboxProps.OnChange (CheckboxChanged >> dispatch) ] []
+                        RT.switch [ Label "Switch me"; Checked model.isChecked; SwitchProps.OnChange (SwitchChanged >> dispatch) ] []
                     ]
                 ]
                 RT.tab [ Label "List" ] [
@@ -56,7 +75,9 @@ type App(props) as this =
             ]
         ]
 
-ReactDom.render(
-        R.com<App,_,_> () [],
-        Browser.document.getElementsByClassName("app").[0]
-    ) |> ignore
+open Elmish
+open Elmish.React
+
+Program.mkSimple init update view
+|> Program.withReactUnoptimized "app"
+|> Program.run
